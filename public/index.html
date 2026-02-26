@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="it">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Freezer Manager ❄️</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+    <div class="container">
+        <header>
+            <h1>Freezer ❄️</h1>
+            <button id="push-btn" class="btn-push" style="display:none;">Attiva Notifiche</button>
+        </header>
+
+        <section id="alerts-section"></section>
+
+        <hr>
+
+        <section>
+            <div id="categories-accordion"></div>
+        </section>
+    </div>
+
+    <button class="fab" onclick="openModal()"><i class="fa-solid fa-plus"></i></button>
+
+    <div id="modal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3>Aggiungi Prodotto</h3>
+                <button type="button" class="close-modal" onclick="closeModal()">&times;</button>
+            </div>
+
+            <form id="add-product-form">
+                <div class="form-group">
+                    <label for="form-category">Categoria</label>
+                    <select id="form-category" onchange="handleCategoryChange()">
+                        <option value="">Seleziona...</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label for="form-name-select">Prodotto</label>
+                    <select id="form-name-select" required>
+                        <option value="">Scegli prima la categoria</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label for="form-expiry">Data di Scadenza</label>
+                    <input type="date" id="form-expiry">
+                </div>
+
+                <div class="modal-actions">
+                    <button type="button" class="btn-cancel" onclick="closeModal()">Annulla</button>
+                    <button type="button" onclick="saveProduct()" class="btn-save">Salva nel Freezer</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <script src="app.js"></script>
+</body>
+
+</html>

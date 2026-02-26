@@ -1,0 +1,13 @@
+{
+    "name": "Freezer Manager",
+    "short_name": "Freezer",
+    "start_url": "/",
+    "display": "standalone",
+    "background_color": "#ffffff",
+    "theme_color": "#2196f3",
+    "icons": [{
+        "src": "https://cdn-icons-png.flaticon.com/512/561/561169.png",
+        "sizes": "512x512",
+        "type": "image/png"
+    }]
+}
