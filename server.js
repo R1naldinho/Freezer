@@ -180,11 +180,11 @@ app.get("/api/getExpiringProducts/:days", async(req, res) => {
 
 // Aggiungi prodotto
 app.post("/api/addProduct", async(req, res) => {
-    const { product_id, expiry_date } = req.body;
+    const { product_id, expiry_date, name} = req.body;
     try {
         const { data, error } = await supabase
             .from("products")
-            .insert([{ product_id, expiry_date }])
+            .insert([{ product_id, expiry_date, name}])
             .select();
         if (error) throw error;
         res.json(data[0]);
@@ -211,3 +211,4 @@ app.delete("/api/deleteProduct/:id", async(req, res) => {
 app.listen(port, "0.0.0.0", () => {
     console.log(`Server freezer attivo sulla porta ${port}`);
 });
+
