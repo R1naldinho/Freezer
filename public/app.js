@@ -178,6 +178,7 @@ async function saveProduct() {
   const data = {
     product_id: document.getElementById("form-name-select").value,
     expiry_date: document.getElementById("form-expiry").value || null,
+    name: allPossibleProducts.find(p => p.product_id === document.getElementById("form-name-select").value)?.name || "Sconosciuto"
   };
 
   if (
