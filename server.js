@@ -29,9 +29,9 @@ app.get("/", (req, res) => {
 
 // --- AUTOMAZIONE CRON (Ore 17:00 ogni giorno) ---
 cron.schedule(
-    "0 17 * * *",
+    "0 19 * * *",
     async() => {
-        console.log("Controllo scadenze delle ore 17:00...");
+        console.log("Controllo scadenze delle ore 19:00...");
 
         const dataTarget = new Date();
         dataTarget.setDate(dataTarget.getDate() + 7);
@@ -154,6 +154,7 @@ app.get("/api/getExpiringProducts", async(req, res) => {
         const { data, error } = await supabase
             .from("products")
             .select("*")
+            .order("name", { ascending: true })
             .order("expiry_date", { ascending: true });
         if (error) throw error;
         res.json(data);
@@ -171,6 +172,7 @@ app.get("/api/getExpiringProducts/:days", async(req, res) => {
             .from("products")
             .select("*")
             .lte("expiry_date", targetDate.toISOString().split("T")[0])
+            .order("name", { ascending: true })
             .order("expiry_date", { ascending: true });
         if (error) throw error;
         res.json(data);
@@ -211,4 +213,5 @@ app.delete("/api/deleteProduct/:id", async(req, res) => {
 
 app.listen(port, "0.0.0.0", () => {
     console.log(`Server freezer attivo sulla porta ${port}`);
+
 });
