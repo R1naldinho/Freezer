@@ -12,6 +12,8 @@ app.use(express.static("public"));
 // --- CONFIGURAZIONE SUPABASE ---
 const supabaseUrl = process.env.SUPABASE_URL;
 const supabaseKey = process.env.SUPABASE_KEY;
+console.log("Supabase URL:", supabaseUrl ? "OK" : "MISSING");
+console.log("Supabase Key:", supabaseKey ? "OK" : "MISSING");
 const supabase = createClient(supabaseUrl, supabaseKey);
 
 // --- CONFIGURAZIONE WEB-PUSH (VAPID) ---
