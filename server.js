@@ -3,6 +3,11 @@ const cron = require("node-cron");
 const webpush = require("web-push");
 const { createClient } = require("@supabase/supabase-js");
 //require("dotenv").config({ path: "dot.env" });
+const path = require("path");
+
+app.get("/", (req, res) => {
+    res.sendFile(path.join(__dirname, "public", "index.html"));
+});
 
 const app = express();
 const port = 3000;
