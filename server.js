@@ -15,7 +15,6 @@ const supabaseKey = process.env.SUPABASE_KEY;
 const supabase = createClient(supabaseUrl, supabaseKey);
 
 // --- CONFIGURAZIONE WEB-PUSH (VAPID) ---
-// Genera queste chiavi con: npx web-push generate-vapid-keys
 const mail = process.env.VAPID_MAIL;
 const publicVapidKey = process.env.PUBLIC_VAPID_KEY;
 const privateVapidKey = process.env.PRIVATE_VAPID_KEY;
@@ -206,6 +205,6 @@ app.delete("/api/deleteProduct/:id", async(req, res) => {
     }
 });
 
-app.listen(port, () => {
-    console.log(`Server freezer attivo su http://localhost:${port}`);
+app.listen(port, "0.0.0.0", () => {
+    console.log(`Server freezer attivo sulla porta ${port}`);
 });
