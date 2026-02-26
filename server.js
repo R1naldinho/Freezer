@@ -42,15 +42,13 @@ cron.schedule(
                 .from("products")
                 .select("product_id, id")
                 .lte("expiry_date", dataString)
+                .order("name", { ascending: true })
                 .order("expiry_date", { ascending: true });
 
             if (prodError) throw prodError;
             console.log(`Prodotti in scadenza il ${dataString}:`, prodotti);
 
             if (prodotti && prodotti.length > 0) {
-                const { data: AllPossibleProducts } = await supabase
-                    .from("productsAndCategories")
-                    .select("product_id, name");
 
                 const { data: subs, error: subError } = await supabase
                     .from("push_subscriptions")
@@ -62,8 +60,7 @@ cron.schedule(
                     const payload = JSON.stringify({
                         title: "Scadenza Freezer! ❄️",
                         body: `Tra 7 giorni scadono: ${prodotti.map((p) => {
-                            const product = AllPossibleProducts.find((ap) => ap.product_id === p.product_id);
-                            return product ? product.name : p.product_id;
+                            return p.name || p.product_id;
                         }).join(", ")}`,
                     });
 
@@ -213,5 +210,4 @@ app.delete("/api/deleteProduct/:id", async(req, res) => {
 
 app.listen(port, "0.0.0.0", () => {
     console.log(`Server freezer attivo sulla porta ${port}`);
-
 });
